@@ -1,0 +1,1 @@
+const kMaxStats = 200;
