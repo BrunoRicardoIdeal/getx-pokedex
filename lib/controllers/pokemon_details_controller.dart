@@ -1,11 +1,16 @@
 import 'package:get/get.dart';
 import 'package:pokedex/models/pokemon.dart';
+import 'package:pokedex/models/pokemon_data.dart';
 import 'package:pokedex/models/pokemon_evolution_chain.dart';
 import 'package:pokedex/models/pokemon_move_detail.dart';
 import 'package:pokedex/repositories/pokemon_repository.dart';
 
 class PokemonDetailsController extends GetxController {
   final PokemonRepository repository;
+
+  Rx<PokemonData> curPokeData = PokemonData().obs;
+
+  RxInt selectedPageIndex = 0.obs;
   RxBool isLoadingMoves = false.obs;
   RxString firstSelected = ''.obs;
 
@@ -21,13 +26,20 @@ class PokemonDetailsController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    await changeCurrentPokemon(Get.arguments[0] as Pokemon);
-    firstSelected.value = currentPokemon.value.name!;
+    final poke = Get.arguments[0] as Pokemon;
+    await changeCurrentPokemon(poke);
+    firstSelected.value = poke.name!;
+
     super.onInit();
   }
 
   Future<void> changeCurrentPokemon(Pokemon pokemon) async {
     currentPokemon.value = pokemon;
+    // curPokeData.value = await repository.getPokemonData(pokemon);
+  }
+
+  void changeSelectedPage(int index) {
+    selectedPageIndex.value = index;
   }
 
   Future<List<MoveDetail>> getMovesDetails(Pokemon pokemon) async {

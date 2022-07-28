@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pokedex/controllers/home_controller.dart';
+import 'package:pokedex/widgets/custom_shimmer.dart';
+import 'package:pokedex/widgets/pokemon_card_shimmer.dart';
 import 'package:pokedex/widgets/pokemon_home_card.dart';
 import 'package:pokedex/widgets/pokemon_search_sheet.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
@@ -22,12 +23,8 @@ class HomePage extends GetView<HomeController> {
   Widget _buildShimmers() {
     List<Widget> list = List<Widget>.generate(
       10,
-      (_) => Shimmer.fromColors(
-        baseColor: Colors.white,
-        highlightColor: Colors.blueGrey,
-        child: Container(
-          decoration: PokemonHomeCard.boxDecoration(Colors.white),
-        ),
+      (_) => const CustomShimmer(
+        child: PokemonCardShimmer(),
       ),
     );
 

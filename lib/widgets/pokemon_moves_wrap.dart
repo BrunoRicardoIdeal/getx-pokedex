@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:pokedex/controllers/pokemon_details_controller.dart';
 import 'package:pokedex/models/pokemon_move_detail.dart';
 import 'package:pokedex/utils/app_colors.dart';
+import 'package:pokedex/widgets/custom_shimmer.dart';
 import 'package:pokedex/widgets/pokemon_detail_card.dart';
+import 'package:pokedex/widgets/pokemon_moves_shimmer.dart';
 
 class PokemonMovesWrap extends StatelessWidget {
   const PokemonMovesWrap({
@@ -51,8 +53,8 @@ class PokemonMovesWrap extends StatelessWidget {
                 child: (controller.isLoadingMoves.value ||
                         !snapshot.hasData ||
                         snapshot.data.isEmpty)
-                    ? const Center(
-                        child: CircularProgressIndicator(),
+                    ? const CustomShimmer(
+                        child: PokemonMovesShimmer(),
                       )
                     : SingleChildScrollView(
                         physics: const BouncingScrollPhysics(),
@@ -67,23 +69,5 @@ class PokemonMovesWrap extends StatelessWidget {
         );
       },
     );
-
-    // return PokemonDetailCard(
-    //   child: Padding(
-    //     padding: const EdgeInsets.all(8.0),
-    //     child: SingleChildScrollView(
-    //       physics: const BouncingScrollPhysics(),
-    //       scrollDirection: Axis.vertical,
-    //       child: GetX<PokemonDetailsController>(
-    //         builder: (_) {
-    //           final moves = generateMoves(context);
-    //           return Wrap(
-    //             children: moves,
-    //           );
-    //         },
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }

@@ -28,7 +28,7 @@ class PokedexApp extends StatelessWidget {
         ),
         GetPage(
           name: HomePage.routeName,
-          page: () => HomePage(),
+          page: () => const HomePage(),
           binding: HomeBinding(),
         ),
         GetPage(
